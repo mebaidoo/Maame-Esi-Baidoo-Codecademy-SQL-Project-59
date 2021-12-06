@@ -1,0 +1,16 @@
+-- Investigating the table
+SELECT * FROM transactions;
+-- Finding the total money_in
+SELECT SUM(money_in) FROM transactions;
+-- Finding the total money_out
+SELECT SUM(money_out) FROM transactions;
+-- Finding out if Bitcoin dominates Fiddy Cent's exchange
+SELECT COUNT(*) FROM transactions WHERE money_in IS NOT NULL;
+SELECT COUNT(*) FROM transactions WHERE money_in IS NOT NULL AND currency = "BIT";
+-- Finding the largest transaction in the table (in money_in or money_out)
+SELECT MAX(money_in) FROM transactions;
+SELECT MAX(money_out) FROM transactions;
+-- Finding the average money_in for the Ethereum currency
+SELECT AVG(money_in) FROM transactions WHERE currency = "ETH";
+-- Finding the average money_in and average money_out for the different dates
+SELECT date AS "Date", ROUND(AVG(money_in), 2) AS "Average Buy", ROUND(AVG(money_out), 2) AS "Average Sell" FROM transactions GROUP BY 1;
